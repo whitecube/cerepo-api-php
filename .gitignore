@@ -1,0 +1,10 @@
+.DS_Store
+thumbs.db
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+/.vagrant
+.phpunit.result.cache
+/.phpunit.cache
+.idea
