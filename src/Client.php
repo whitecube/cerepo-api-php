@@ -10,14 +10,14 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
     protected HttpClient $http;
-    protected TokenClient $tokenClient;
+    protected TokenClient $auth;
 
-    public function __construct(TokenClient $tokenClient, string $baseUrl = 'https://acc.cerepo.io/api/')
+    public function __construct(TokenClient $auth, string $url = 'https://acc.cerepo.io/api/')
     {
-        $this->tokenClient = $tokenClient;
+        $this->auth = $auth;
 
         $this->http = new HttpClient([
-            'base_uri' => rtrim($baseUrl, '/') . '/',
+            'base_uri' => rtrim($url, '/') . '/',
         ]);
     }
 
@@ -28,7 +28,7 @@ class Client
 
     public function request(string $method, string $uri, ?array $payload = null): mixed
     {
-        $token = $this->tokenClient->getAccessToken();
+        $token = $this->auth->getAccessToken();
 
         $options = [
             'headers' => [
