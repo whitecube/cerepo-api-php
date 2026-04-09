@@ -18,9 +18,9 @@ class Sources
         return (new Source($data));
     }
 
-    public function post(array $data): mixed
+    public function post(array|Source $data): string
     {
-        $source = (new Source($data));
+        $source = is_array($data) ? (new Source($data)) : $data;
 
         return $this->client->request('POST', 'sources', $source->toArray());
     }
