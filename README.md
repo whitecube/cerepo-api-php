@@ -2,6 +2,12 @@
 
 This package provides a small PHP client around the Cerepo API.
 
+## Installation
+
+```
+composer require whitecube/cerepo-api-php
+```
+
 ## Configuration
 
 Create a `TokenClient` instance.  
