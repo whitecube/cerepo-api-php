@@ -10,7 +10,7 @@ Create a `TokenClient` instance.
 use Whitecube\Cerepo\TokenClient;
 
 $tokenClient = new TokenClient(
-    $tokenUrl,     // e.g. "https://example.com/oauth2/v2.0/token"
+    $tokenUrl,     // e.g. "https://token.cerepo.io/74ab26ad-6287-4bdc-8a6e-a770ae261d2c/oauth2/v2.0/token"
     $clientId,     // your client id
     $clientSecret  // your client secret
 );
