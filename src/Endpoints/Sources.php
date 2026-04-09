@@ -9,11 +9,13 @@ class Sources
 {
     public function __construct(protected Client $client) {}
 
-    public function get(string $id): array
+    public function get(string $id): Source
     {
         $uri = 'sources/' . $id;
 
-        return $this->client->request('GET', $uri);
+        $data = $this->client->request('GET', $uri);
+
+        return (new Source($data));
     }
 
     public function post(array $data): mixed

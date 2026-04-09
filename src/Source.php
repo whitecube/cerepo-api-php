@@ -2,6 +2,7 @@
 
 namespace Whitecube\Cerepo;
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 
@@ -60,15 +61,21 @@ class Source
             return null;
         }
 
-        if (! $data[$key] instanceof DateTimeInterface) {
+        $date = $data[$key];
+
+        if (is_string($data[$key])) {
+            $date = new DateTimeImmutable($data[$key]);
+        }
+
+        if (! $date instanceof DateTimeInterface) {
             throw new InvalidArgumentException(sprintf(
                 'Invalid type for "%s"; expected DateTimeInterface or string, got %s.',
                 $key,
-                get_debug_type($data[$key])
+                get_debug_type($date)
             ));
         }
 
-        return $data[$key]->format('Y-m-d');
+        return $date->format('Y-m-d');
     }
 
     protected function castRequireString(array $data, string $key): string
