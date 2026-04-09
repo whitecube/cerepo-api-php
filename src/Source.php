@@ -232,29 +232,6 @@ class Source
 
     public function toArray(): array
     {
-        $payload = [
-            'unf_id' => $this->unf_id,
-            'host_ref' => $this->host_ref,
-            'prod_ids' => $this->prod_ids,
-            'val_ids' => $this->val_ids,
-            'aud_ids' => $this->aud_ids,
-            'pub_date' => $this->pub_date,
-            'upd_date' => $this->upd_date,
-            'rvw_date' => $this->rvw_date,
-            'obs_date' => $this->obs_date,
-            'title' => $this->title,
-            'url' => $this->url,
-            'lang' => $this->lang,
-            'prod_refs' => $this->prod_refs,
-            'codes' => $this->codes,
-            'content' => $this->content,
-            'synonyms' => $this->synonyms,
-            'cross_refs' => $this->cross_refs,
-        ];
-
-        return array_filter(
-            $payload,
-            static fn ($value) => $value !== null
-        );
+        return get_object_vars($this);
     }
 }
