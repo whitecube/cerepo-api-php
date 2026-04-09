@@ -12,7 +12,7 @@ class Client
     protected TokenClient $tokenClient;
     protected string $baseUrl;
 
-    public function __construct(TokenClient $tokenClient, ?string $baseUrl = 'https://acc.cerepo.io/api/')
+    public function __construct(TokenClient $tokenClient, string $baseUrl = 'https://acc.cerepo.io/api/')
     {
         $this->tokenClient = $tokenClient;
         $this->baseUrl = rtrim($baseUrl, '/') . '/';
