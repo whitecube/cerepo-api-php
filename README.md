@@ -9,7 +9,7 @@ Create a `TokenClient` instance.
 ```php
 use Whitecube\Cerepo\TokenClient;
 
-$tokenClient = new TokenClient(
+$auth = new TokenClient(
     $tokenUrl,     // e.g. "https://token.cerepo.io/74ab26ad-6287-4bdc-8a6e-a770ae261d2c/oauth2/v2.0/token"
     $clientId,     // your client id
     $clientSecret  // your client secret
@@ -21,25 +21,16 @@ Then, create the main `Client` used to call the Cerepo API:
 ```php
 use Whitecube\Cerepo\Client;
 
-$client = new Client($tokenClient, 'https://acc.cerepo.io/api/');
+$client = new Client($auth, 'https://acc.cerepo.io/api/');
 ```
 
 ## Basic usage
 
-### GET requests
+### Sources
 
 ```php
-// GET /sources
-$sources = $client->get('sources');
-
-// GET /sources/{id}
-$source = $client->get('sources', '1234');
-```
-
-### POST requests
-
-```php
-$response = $client->post('sources', [
+// POST /sources - Add or update a Source
+$response = $client->sources()->post([
     'lang'   => 'en',
     'title'  => 'Example article',
     'url'    => 'https://example.com/article',
@@ -49,4 +40,9 @@ $response = $client->post('sources', [
     'aud_ids'  => ['audience-1'],
     ...
 ]);
+```
+
+```php
+// GET /sources/{unf_id} - Get a specific source by unified-id (unf_id)
+$source = $client->sources()->get('1234');
 ```
