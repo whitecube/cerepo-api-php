@@ -3,6 +3,7 @@
 namespace Whitecube\Cerepo;
 
 use GuzzleHttp\Client as HttpClient;
+use Whitecube\Cerepo\Endpoints\Sources;
 use Whitecube\Cerepo\Source;
 use Psr\Http\Message\ResponseInterface;
 
@@ -22,18 +23,9 @@ class Client
         ]);
     }
 
-    public function get(string $path, ?string $id = null): array
+    public function sources(): Sources
     {
-        $uri = rtrim($path, '/') . ($id ? "/{$id}" : '');
-
-        return $this->request('GET', $uri);
-    }
-
-    public function post(string $path, array $data)
-    {
-        $source = (new Source($data));
-
-        return $this->request('POST', $path, $source->toArray());
+        return new Sources($this);
     }
 
     public function request(string $method, string $uri, ?array $payload = null): mixed
@@ -63,7 +55,7 @@ class Client
         $body = (string) $response->getBody();
 
         if ($status < 200 || $status >= 300) {
-            throw new \RuntimeException("CeRepo API error: {$status} - {$body}");
+            throw new \RuntimeException("Cerepo API error: {$status} - {$body}");
         }
 
         $data = json_decode($body, true);
