@@ -8,19 +8,16 @@ use Psr\Http\Message\ResponseInterface;
 class TokenClient
 {
     protected HttpClient $http;
-    protected string $tokenUrl;
-    protected string $clientId;
-    protected string $clientSecret;
     protected string $scope = 'https://cerepo.io/api/.default';
 
     protected ?string $accessToken = null;
     protected ?int $expiresAt = null;
 
-    public function __construct(string $tokenUrl, string $clientId, string $clientSecret)
-    {
-        $this->tokenUrl = $tokenUrl;
-        $this->clientId = $clientId;
-        $this->clientSecret = $clientSecret;
+    public function __construct(
+        public readonly string $tokenUrl,
+        public readonly string $clientId,
+        public readonly string $clientSecret,
+    ) {
         $this->http = new HttpClient();
     }
 
